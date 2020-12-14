@@ -36,5 +36,27 @@ function addMeal(mealData, random = false) {
           <i class="fas fa-heart"></i>
         </button>
       </div>`;
+
+  const btn = meal.querySelector('.meal-body .fav-btn');
+
+  btn.addEventListener('click', () => {
+    if (btn, classList.contains('active')) {
+      removeMealLS(mealData.idMeal);
+      btn.classList.remove('active');
+    } else {
+      addMealLS(mealData.idMeal);
+      btn.classList.add('active');
+    }
+    fetchFavMeals();
+  });
+  meal.addEventListener('click', () => {
+    showMealInfo(mealData);
+  });
   mealsEl.appendChild(meal);
+}
+
+function addMealLS(mealId) {
+  const mealIds = getMealsId();
+
+  localStorage.setItem('mealIds', JSON.stringify([...mealIds, mealId]));
 }
